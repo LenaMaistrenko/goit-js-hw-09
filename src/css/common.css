@@ -16,3 +16,73 @@ img {
   display: block;
   max-width: 100%;
 }
+/* Task2 */
+#datetime-picker {
+  margin-bottom: 20px;
+  margin-right: 20px;
+
+  width: 200px;
+  height: 50px;
+
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #000000;
+  border-radius: 5px;
+  background-color: rgba(129, 226, 233, 0.6);
+}
+[data-start] {
+  width: 50px;
+  height: 50px;
+
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #000000;
+  border-radius: 5px;
+  background-color: rgba(9, 139, 124, 0.6);
+}
+
+[data-start]:disabled {
+  color: rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
+  background-color: rgba(59, 59, 59, 0.3);
+}
+.timer {
+  padding: 20px 30px;
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: #3b3b3b;
+
+  background-color: rgba(128, 203, 196, 0.6);
+
+  border-radius: 5px;
+} 
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #000000;
+}
+.value {
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #000000;
+  /* position: relative; */
+    padding: 3px;
+    background-color: rgba(128, 203, 196, 0.6);
+    border-radius: 5px;
+    font-size: 24px;
+}

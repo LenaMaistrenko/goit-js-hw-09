@@ -1,5 +1,9 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import Notiflix from 'notiflix';
+let timeCheck;
+let timerId = null;
+const INTERVAL_DURATION = 1000;
 
 const options = {
   enableTime: true,
@@ -7,10 +11,17 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+    timeCheck = selectedDates[0].getTime();
+    if (timeCheck >= date.getTime()) {
+      ref.btnStart.disabled = false;
+    } else Notiflix.Notify.failure('Please choose a date in the future');
   },
 };
+
+const date = new Date();
+
 const fp = flatpickr('#datetime-picker', options);
+
 const ref = {
   btnStart: document.querySelector('[data-start]'),
   timerDays: document.querySelector('[data-days]'),
@@ -18,7 +29,28 @@ const ref = {
   timerMinutes: document.querySelector('[data-minutes]'),
   timerSeconds: document.querySelector('[data-seconds]'),
 };
+
 ref.btnStart.disabled = true;
+ref.btnStart.addEventListener('click', startOn);
+function startOn() {
+  ref.btnStart.disabled = true;
+  let currentTime = timeCheck - date.getTime();
+
+  timerId = setInterval(() => {
+    if (currentTime < 0) {
+      return;
+    }
+    ref.timerDays.textContent = addLeadingZero(convertMs(currentTime).days);
+    ref.timerHours.textContent = addLeadingZero(convertMs(currentTime).hours);
+    ref.timerMinutes.textContent = addLeadingZero(
+      convertMs(currentTime).minutes
+    );
+    ref.timerSeconds.textContent = addLeadingZero(
+      convertMs(currentTime).seconds
+    );
+      currentTime -= 1000;
+  }, INTERVAL_DURATION);
+
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -38,5 +70,6 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+function addLeadingZero(value) {
+  return String(value).padStart(2, 0);
+}
