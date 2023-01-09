@@ -38,6 +38,7 @@ function startOn() {
 
   timerId = setInterval(() => {
     if (currentTime < 0) {
+      clearTimeout(timerId);
       return;
     }
     ref.timerDays.textContent = addLeadingZero(convertMs(currentTime).days);
@@ -48,9 +49,9 @@ function startOn() {
     ref.timerSeconds.textContent = addLeadingZero(
       convertMs(currentTime).seconds
     );
-      currentTime -= 1000;
+    currentTime -= 1000;
   }, INTERVAL_DURATION);
-
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time

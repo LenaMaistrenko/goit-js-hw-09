@@ -8,7 +8,7 @@ function getRandomHexColor() {
 }
 
 stopBtn.disabled = true;
-
+startBtn.disabled = false;
 startBtn.addEventListener('click', startOn);
 function startOn() {
   startBtn.disabled = true;
